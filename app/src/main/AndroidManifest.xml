@@ -2,6 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.exaccu.smartbulter">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+
+
+
+    <!--保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!--获取sd卡写的权限，用于文件上传和下载-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--允许读取手机状态 用于创建BmobInstallation-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <application
         android:name=".application.BaseApplication"
         android:allowBackup="true"
@@ -10,11 +23,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".ui.BaseActivity" />
         <activity android:name=".ui.SettingActivity" />
-        <!--闪屏页使用自定义全屏主题，在style.xml中定义-->
-        <activity android:name=".ui.SplashActivity"
+        <!-- 闪屏页使用自定义全屏主题，在style.xml中定义 -->
+        <activity
+            android:name=".ui.SplashActivity"
             android:theme="@style/NoActivityFullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,8 +36,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.GuideActivity"
-            android:theme="@style/NoActivityFullscreen"/>
+        <activity
+            android:name=".ui.GuideActivity"
+            android:theme="@style/NoActivityFullscreen" />
+        <activity android:name=".ui.LoginActivity" />
+        <activity android:name=".ui.RegisteredActivity"></activity>
     </application>
 
 </manifest>

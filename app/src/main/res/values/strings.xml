@@ -66,6 +66,9 @@
     <string name="text_setting_content_6">时刻掌握自身位置</string>
     <string name="text_setting_content_7">www.imooc.com</string>
     <string name="text_now_login">正在登陆...</string>
+    <string name="no_desc">这个人很懒，什么都没留下！</string>
+    <string name="input_cannot_empty">输入框不能为空</string>
+    <string name="two_pass_not_same">两次密码不一致！</string>
 
 
 </resources>

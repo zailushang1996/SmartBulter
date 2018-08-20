@@ -19,6 +19,7 @@ import com.exaccu.smartbulter.fragment.WeChatFragment;
 import com.exaccu.smartbulter.ui.SettingActivity;
 import com.exaccu.smartbulter.utils.L;
 import com.exaccu.smartbulter.utils.ShareUtils;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.ArrayList;
 import java.util.List;
