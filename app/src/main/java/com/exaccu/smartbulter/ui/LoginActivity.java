@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -15,6 +16,7 @@ import com.exaccu.smartbulter.MainActivity;
 import com.exaccu.smartbulter.R;
 import com.exaccu.smartbulter.entity.MyUser;
 import com.exaccu.smartbulter.utils.ShareUtils;
+import com.exaccu.smartbulter.view.CustomDialog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,6 +39,8 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.tv_forget)
     TextView tvForget;
 
+    private CustomDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,12 +53,16 @@ public class LoginActivity extends AppCompatActivity {
         if (isCheck) {
             //设置密码
             etName.setText(ShareUtils.getString(this, "name", ""));
-            etPassword.setText(ShareUtils.getString(this,"password",""));
+            etPassword.setText(ShareUtils.getString(this, "password", ""));
         }
+
+        dialog = new CustomDialog(this, 100, 100, R.layout.dialog_loading, R.style.Theme_dialog, Gravity.CENTER,R.style.pop_anim_style);
+        dialog.setCancelable(false);
     }
 
-    @OnClick({R.id.keep_password, R.id.btnLogin, R.id.btn_registered})
+    @OnClick({R.id.keep_password, R.id.btnLogin, R.id.btn_registered, R.id.tv_forget})
     public void onViewClicked(View view) {
+
         switch (view.getId()) {
             case R.id.keep_password:
                 break;
@@ -64,6 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                 String password = etPassword.getText().toString().trim();
                 //判断是否为空
                 if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(password)) {
+                    dialog.show();
                     //登录
                     final MyUser user = new MyUser();
                     user.setUsername(name);
@@ -71,14 +80,15 @@ public class LoginActivity extends AppCompatActivity {
                     user.login(new SaveListener<MyUser>() {
                         @Override
                         public void done(MyUser myUser, BmobException e) {
+                            dialog.dismiss();
                             //判断登录结果
                             if (null == e) {
                                 /*if (user.getEmailVerified()) {
                                     判断邮箱是否验证，此功能已收费
                                 }*/
-                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             } else {
-                                Toast.makeText(LoginActivity.this, "登录失败！"+e.toString(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "登录失败！" + e.toString(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -87,8 +97,10 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.btn_registered:
-                startActivity(new Intent(this,RegisteredActivity.class));
+                startActivity(new Intent(this, RegisteredActivity.class));
                 break;
+            case R.id.tv_forget:
+                startActivity(new Intent(this,ForgetPasswordActivity.class));
         }
     }
 
