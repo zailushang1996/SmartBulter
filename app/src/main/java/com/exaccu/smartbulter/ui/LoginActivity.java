@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
             etName.setText(ShareUtils.getString(this, "name", ""));
             etPassword.setText(ShareUtils.getString(this, "password", ""));
         }
-
+        //自定义一个dialog
         dialog = new CustomDialog(this, 100, 100, R.layout.dialog_loading, R.style.Theme_dialog, Gravity.CENTER,R.style.pop_anim_style);
         dialog.setCancelable(false);
     }
@@ -72,6 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                 String password = etPassword.getText().toString().trim();
                 //判断是否为空
                 if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(password)) {
+                    //显示dialog
                     dialog.show();
                     //登录
                     final MyUser user = new MyUser();

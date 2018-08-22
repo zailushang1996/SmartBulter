@@ -40,7 +40,7 @@
             android:theme="@style/NoActivityFullscreen" />
         <activity android:name=".ui.LoginActivity" />
         <activity android:name=".ui.RegisteredActivity" />
-        <activity android:name=".ui.ForgetPasswordActivity"></activity>
+        <activity android:name=".ui.ForgetPasswordActivity"/>
     </application>
 
 </manifest>
