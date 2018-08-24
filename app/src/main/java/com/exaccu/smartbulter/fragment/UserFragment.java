@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -23,8 +24,11 @@ import android.widget.Toast;
 
 import com.exaccu.smartbulter.R;
 import com.exaccu.smartbulter.entity.MyUser;
+import com.exaccu.smartbulter.ui.CourierActivity;
 import com.exaccu.smartbulter.ui.LoginActivity;
+import com.exaccu.smartbulter.utils.L;
 import com.exaccu.smartbulter.utils.PermissionUtil;
+import com.exaccu.smartbulter.utils.UtilTools;
 import com.exaccu.smartbulter.view.CustomDialog;
 
 import java.io.File;
@@ -50,6 +54,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class UserFragment extends Fragment implements View.OnClickListener {
 
 
+    private static final int RESULT_REQUEST_CODE = 102;
     @BindView(R.id.edit_user)
     TextView editUser;
     @BindView(R.id.et_username)
@@ -91,6 +96,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_user, container, false);
         unbinder = ButterKnife.bind(this, view);
 
+        UtilTools.getImageToShare(getContext(), profileImage);
         //默认不可点击
         etUsername.setEnabled(false);
         etAge.setEnabled(false);
@@ -124,7 +130,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         unbinder.unbind();
     }
 
-    @OnClick({R.id.btn_update_ok, R.id.btn_exit_user, R.id.edit_user})
+    @OnClick({R.id.btn_update_ok, R.id.btn_exit_user, R.id.edit_user, R.id.tv_courier})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.edit_user:
@@ -173,6 +179,9 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 BmobUser currentUser = MyUser.getCurrentUser();
                 startActivity(new Intent(getActivity(), LoginActivity.class));
                 getActivity().finish();
+                break;
+            case R.id.tv_courier:
+                startActivity(new Intent(getActivity(), CourierActivity.class));
                 break;
         }
     }
@@ -269,6 +278,64 @@ public class UserFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != getActivity().RESULT_CANCELED) {
+            switch (requestCode) {
+                case IMAGE_REQUEST_CODE:
+                    startPhotoZoom(data.getData());
+                    break;
+                case CAMERA_REQUEST_CODE:
+                    tempFile = new File(Environment.getExternalStorageDirectory(), PHOTO_IMAGE_FILE_NAME);
+                    startPhotoZoom(Uri.fromFile(tempFile));
+                    break;
+                case RESULT_REQUEST_CODE:
+                    //有可能点击舍弃
+                    if (data != null) {
+                        //拿到图片设置
+                        setImageToView(data);
+                        //既然已经设置了图片，我们原先的就应该删除
+                        if (tempFile != null) {
+                            tempFile.delete();
+                        }
+                    }
+                    break;
+            }
+        }
+    }
+
+    //裁剪
+    private void startPhotoZoom(Uri uri) {
+        if (uri == null) {
+            L.e("uri == null");
+            return;
+        }
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        intent.setDataAndType(uri, "image/*");
+        //设置裁剪
+        intent.putExtra("crop", "true");
+        //裁剪宽高比例
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        //裁剪图片的质量
+        intent.putExtra("outputX", 320);
+        intent.putExtra("outputY", 320);
+        //发送数据
+        intent.putExtra("return-data", true);
+        startActivityForResult(intent, RESULT_REQUEST_CODE);
+    }
+
+    //设置图片
+    private void setImageToView(Intent data) {
+        Bundle bundle = data.getExtras();
+        if (bundle != null) {
+            Bitmap bitmap = bundle.getParcelable("data");
+            profileImage.setImageBitmap(bitmap);
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //保存
+        UtilTools.putImageToShare(getActivity(), profileImage);
     }
 }

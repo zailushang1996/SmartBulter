@@ -18,4 +18,7 @@ public class StaticClass {
 
     //Bmob key
     public static final String BMOB_KEY = "23674a1aa728fa723c2a5d372d754999";
+
+    //快递Key
+    public static final String COURIER_KEY = "1af43b4fd1c9ecf97493233f6769b749";
 }
