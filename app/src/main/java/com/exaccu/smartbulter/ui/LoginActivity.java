@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         //设置选中状态
-        boolean isCheck = ShareUtils.getBoolran(this, "keeppass", false);
+        boolean isCheck = ShareUtils.getBoolean(this, "keeppass", false);
         keepPassword.setChecked(isCheck);
         if (isCheck) {
             //设置密码

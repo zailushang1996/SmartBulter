@@ -2,14 +2,12 @@ package com.exaccu.smartbulter.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-import com.exaccu.smartbulter.MainActivity;
 import com.exaccu.smartbulter.R;
 import com.exaccu.smartbulter.utils.ShareUtils;
 import com.exaccu.smartbulter.utils.StaticClass;
@@ -61,7 +59,7 @@ public class SplashActivity extends AppCompatActivity {
      * @return true表示第一次运行，false反之
      */
     private boolean isFirstRun() {
-        boolean isFirst = ShareUtils.getBoolran(this, StaticClass.SHARE_IS_FIRST, true);
+        boolean isFirst = ShareUtils.getBoolean(this, StaticClass.SHARE_IS_FIRST, true);
         if (isFirst) {
             ShareUtils.putBoolean(this, StaticClass.SHARE_IS_FIRST, false);
             return true;

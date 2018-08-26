@@ -26,6 +26,7 @@ import com.exaccu.smartbulter.R;
 import com.exaccu.smartbulter.entity.MyUser;
 import com.exaccu.smartbulter.ui.CourierActivity;
 import com.exaccu.smartbulter.ui.LoginActivity;
+import com.exaccu.smartbulter.ui.PhoneActivity;
 import com.exaccu.smartbulter.utils.L;
 import com.exaccu.smartbulter.utils.PermissionUtil;
 import com.exaccu.smartbulter.utils.UtilTools;
@@ -130,7 +131,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         unbinder.unbind();
     }
 
-    @OnClick({R.id.btn_update_ok, R.id.btn_exit_user, R.id.edit_user, R.id.tv_courier})
+    @OnClick({R.id.btn_update_ok, R.id.btn_exit_user, R.id.edit_user, R.id.tv_courier,R.id.tv_phone})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.edit_user:
@@ -182,6 +183,9 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.tv_courier:
                 startActivity(new Intent(getActivity(), CourierActivity.class));
+                break;
+            case R.id.tv_phone:
+                startActivity(new Intent(getActivity(), PhoneActivity.class));
                 break;
         }
     }

@@ -42,6 +42,7 @@
         <activity android:name=".ui.RegisteredActivity" />
         <activity android:name=".ui.ForgetPasswordActivity"/>
         <activity android:name=".ui.CourierActivity"/>
+        <activity android:name=".ui.PhoneActivity"/>
     </application>
 
 </manifest>

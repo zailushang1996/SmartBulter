@@ -78,7 +78,7 @@ public class ShareUtils {
      * @param defValue 默认值
      * @return 获取到的Boolean值
      */
-    public static boolean getBoolran(Context mContext, String key, boolean defValue) {
+    public static boolean getBoolean(Context mContext, String key, boolean defValue) {
         SharedPreferences sp = mContext.getSharedPreferences(NAME, Context.MODE_PRIVATE);
         return sp.getBoolean(key, defValue);
     }

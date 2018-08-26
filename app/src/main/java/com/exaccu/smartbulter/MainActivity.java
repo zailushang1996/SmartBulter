@@ -12,14 +12,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
-import com.exaccu.smartbulter.fragment.BulterFragment;
+import com.exaccu.smartbulter.fragment.ButlerFragment;
 import com.exaccu.smartbulter.fragment.GirlFragment;
 import com.exaccu.smartbulter.fragment.UserFragment;
 import com.exaccu.smartbulter.fragment.WeChatFragment;
 import com.exaccu.smartbulter.ui.SettingActivity;
-import com.exaccu.smartbulter.utils.L;
-import com.exaccu.smartbulter.utils.ShareUtils;
-import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mTitle.add("个人中心");
 
         mFragment = new ArrayList<>();
-        mFragment.add(new BulterFragment());
+        mFragment.add(new ButlerFragment());
         mFragment.add(new WeChatFragment());
         mFragment.add(new GirlFragment());
         mFragment.add(new UserFragment());
