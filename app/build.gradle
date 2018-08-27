@@ -21,6 +21,11 @@ android {
         }
     }
 }
+repositories{
+    flatDir(
+            dirs: 'libs'
+    )
+}
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -35,7 +40,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-
     //以下SDK开发者请根据需要自行选择
     //bmob-sdk：Bmob的android sdk包，包含了Bmob的数据存储、文件等服务，以下是最新的bmob-sdk:
     //3.5.5：请务必查看下面注释[1]
@@ -47,9 +51,9 @@ dependencies {
     implementation('com.kymjs.rxvolley:rxvolley:1.1.4') {
         exclude group: 'io.reactivex'
     }
-
     implementation 'com.squareup.picasso:picasso:2.5.2'
-
     //photoview
     implementation 'com.github.chrisbanes:PhotoView:2.1.4'
+    implementation files('libs/Msc.jar')
+    implementation files('libs/Sunflower.jar')
 }

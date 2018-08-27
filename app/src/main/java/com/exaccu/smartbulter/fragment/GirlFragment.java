@@ -18,6 +18,7 @@ import com.exaccu.smartbulter.entity.GirlData;
 import com.exaccu.smartbulter.utils.L;
 import com.exaccu.smartbulter.utils.PicassoUtils;
 import com.exaccu.smartbulter.view.CustomDialog;
+import com.github.chrisbanes.photoview.PhotoViewAttacher;
 import com.kymjs.rxvolley.RxVolley;
 import com.kymjs.rxvolley.client.HttpCallback;
 

@@ -26,6 +26,10 @@ import com.exaccu.smartbulter.entity.ChatListData;
 import com.exaccu.smartbulter.utils.L;
 import com.exaccu.smartbulter.utils.ShareUtils;
 import com.exaccu.smartbulter.utils.StaticClass;
+import com.iflytek.cloud.SpeechConstant;
+import com.iflytek.cloud.SpeechError;
+import com.iflytek.cloud.SpeechSynthesizer;
+import com.iflytek.cloud.SynthesizerListener;
 import com.kymjs.rxvolley.RxVolley;
 import com.kymjs.rxvolley.client.HttpCallback;
 
@@ -43,7 +47,7 @@ public class ButlerFragment extends Fragment implements View.OnClickListener {
     private ChatListAdapter adapter;
 
     //TTS
-//    private SpeechSynthesizer mTts;
+    private SpeechSynthesizer mTts;
 
     //输入框
     private EditText et_text;
@@ -61,12 +65,12 @@ public class ButlerFragment extends Fragment implements View.OnClickListener {
     private void findView(View view) {
 
         //1.创建SpeechSynthesizer对象, 第二个参数：本地合成时传InitListener
-/*        mTts = SpeechSynthesizer.createSynthesizer(getActivity(), null);
+        mTts = SpeechSynthesizer.createSynthesizer(getActivity(), null);
         //2.合成参数设置，详见《科大讯飞MSC API手册(Android)》SpeechSynthesizer 类
         mTts.setParameter(SpeechConstant.VOICE_NAME, "xiaoyan");//设置发音人
         mTts.setParameter(SpeechConstant.SPEED, "50");//设置语速
         mTts.setParameter(SpeechConstant.VOLUME, "80");//设置音量，范围0~100
-        mTts.setParameter(SpeechConstant.ENGINE_TYPE, SpeechConstant.TYPE_CLOUD); //设置云端*/
+        mTts.setParameter(SpeechConstant.ENGINE_TYPE, SpeechConstant.TYPE_CLOUD); //设置云端
         //设置合成音频保存位置（可自定义保存位置），保存在“./sdcard/iflytek.pcm”
         //保存在SD卡需要在AndroidManifest.xml添加写SD卡权限
         //如果不需要保存合成音频，注释该行代码
@@ -149,9 +153,7 @@ public class ButlerFragment extends Fragment implements View.OnClickListener {
     private void addLeftItem(String text) {
 
         boolean isSpeak = ShareUtils.getBoolean(getActivity(), "isSpeak", false);
-/*        if (isSpeak) {
-            startSpeak(text);
-        }*/
+        startSpeak(text);
 
         ChatListData date = new ChatListData();
         date.setType(ChatListAdapter.VALUE_LEFT_TEXT);
@@ -177,13 +179,13 @@ public class ButlerFragment extends Fragment implements View.OnClickListener {
     }
 
     //开始说话
-/*    private void startSpeak(String text) {
+    private void startSpeak(String text) {
         //3.开始合成
         mTts.startSpeaking(text, mSynListener);
-    }*/
+    }
 
     //合成监听器
-    /*private SynthesizerListener mSynListener = new SynthesizerListener() {
+    private SynthesizerListener mSynListener = new SynthesizerListener() {
         //会话结束回调接口，没有错误时，error为null
         public void onCompleted(SpeechError error) {
         }
@@ -213,6 +215,6 @@ public class ButlerFragment extends Fragment implements View.OnClickListener {
         //会话事件回调接口
         public void onEvent(int arg0, int arg1, int arg2, Bundle arg3) {
         }
-    };*/
+    };
 }
 
