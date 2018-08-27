@@ -39,6 +39,11 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <!--如需使用人脸识别，还要添加：摄相头权限，拍照需要用到 -->
     <uses-permission android:name="android.permission.CAMERA" />
+
+    <!--短信权限-->
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.SEND_SMS"/>
     <application
         android:name=".application.BaseApplication"
         android:allowBackup="true"
@@ -68,7 +73,8 @@
         <activity android:name=".ui.ForgetPasswordActivity" />
         <activity android:name=".ui.CourierActivity" />
         <activity android:name=".ui.PhoneActivity" />
-        <activity android:name=".ui.WebViewActivity"></activity>
+        <activity android:name=".ui.WebViewActivity"/>
+        <service android:name=".service.SmsService"/>
     </application>
 
 </manifest>

@@ -153,7 +153,9 @@ public class ButlerFragment extends Fragment implements View.OnClickListener {
     private void addLeftItem(String text) {
 
         boolean isSpeak = ShareUtils.getBoolean(getActivity(), "isSpeak", false);
-        startSpeak(text);
+        if (isSpeak) {
+            startSpeak(text);
+        }
 
         ChatListData date = new ChatListData();
         date.setType(ChatListAdapter.VALUE_LEFT_TEXT);
